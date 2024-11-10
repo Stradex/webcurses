@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>termlib example</title>
+	<script language="JavaScript" type="text/javascript">
+
+	var term=null;
+
+	function startTerminal() {
+		if (term) return;
+		term=new Terminal({
+			x: 0,
+			y: 0,
+			rows: 25,
+			cols: 100,
+			greeting: '%+r +++ Terminal ready. +++ %-r%n',
+			id: 1,
+			termDiv: 'termDiv',
+			crsrBlinkMode: true,
+			handler: termHandler,
+			exitHandler: termExitHandler
+		});
+		if (term) { 
+			term.open();
+		}
+	}
+
+	function termHandler() {
+
+	}
+
+	function termExitHandler() {
+
+	}
+	</script>
+	<script language="JavaScript" type="text/javascript" src="main.js" defer></script>
+
+<style type="text/css">
+
+/* essential terminal styles */
+
+.term {
+	font-family: courier,fixed,swiss,sans-serif;
+	font-size: 12px;
+	color: #33d011;
+	background: none;
+}
+.termReverse {
+	color: #111111;
+	background: #33d011;
+}
+
+/* other page styles */
+
+body, html {
+	margin 0;
+	padding: 0;
+	position: relative;
+}
+
+body,p,a,td {
+	font-family: courier,fixed,swiss,sans-serif;
+	font-size: 12px;
+	color: #cccccc;
+}
+.lh15 {
+	line-height: 15px;
+}
+
+
+
+
+</style>
+</head>
+
+
+<body bgcolor="#222222" link="#77dd11" text="#cccccc" alink="#dddddd" vlink="#77dd11"
+topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" marginheight="0" marginwidth="0">
+<div id="termDiv"></div>
+
+</body>
+</html>
