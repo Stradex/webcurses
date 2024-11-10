@@ -14,6 +14,5 @@ In order to make ncurses applications to work with EMSCRIPTEN you must add this 
 #else
 	#include <ncurses.h>
 #endif
-#include <ncurses.h>
 ```
 
