@@ -8,6 +8,7 @@ void noecho();
 void curs_set(int vis);
 void endwin();
 int	getch();
+int mvaddch(int y, int x, char ch);
 
 
 #endif

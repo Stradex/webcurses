@@ -12,6 +12,8 @@ void initscr() {
 void noecho() {
 	EM_ASM(
 		window.term.clear();
+		window.term.lock = true;
+		window.term.insert = false;
 	);
 }
 
@@ -43,4 +45,11 @@ EM_ASYNC_JS(int, _get_ch, (), {
 
 int	getch() {
 	return _get_ch();
+}
+
+
+int mvaddch(int y, int x, char ch) {
+	EM_ASM({
+		window.term.setChar($2, $0, $1);
+	}, y, x, ch);
 }
