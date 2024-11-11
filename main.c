@@ -28,7 +28,6 @@ void init_colors() {
 	}
 }
 
-
 int main() {
 	srand(time(NULL));
 	initscr();
@@ -37,14 +36,19 @@ int main() {
 	use_default_colors();
 	init_colors();
 	char ch;
-	char buff[8];
-	while ((ch = getch())) {
+	int frames=0;
+	for(;;) {
+		timeout(1);
+		ch = getch();
 		if (ch == 'q') {
 			break;
 		}
-		sprintf(buff, "%d", PAIR_NUMBER(ch | COLOR_PAIR(UI_COLOR_BLUE)));	
-		mvaddch(random() % 15 + 1, random() % 25 + 1, ch | COLOR_PAIR(random() % (UI_MAX_COLORS - 1) + 1));
+		if (ch != ERR) {
+			clear();
+			mvaddch(random() % 15 + 1, random() % 25 + 1, ch | COLOR_PAIR(random() % (UI_MAX_COLORS - 1) + 1));
+		}
+		frames++;
+		printf("frames: %d\n", frames);
 	}
-	printf("lala\n");
 	endwin();
 }

@@ -1,4 +1,5 @@
 var term=null;
+var _stack_arg = [];
 let _ncurses_colors = [
 		'black',
 		'red',
@@ -33,12 +34,28 @@ function startTerminal() {
 	}
 }
 
-async function waitForKeyPress() {
+async function waitForKeyPress(timeout) {
 	return new Promise((resolve) => {
 		var tg=Terminal.prototype.globals;
-		tg.registerEvent(document, 'keypress', function handler(e) {
-			tg.releaseEvent(document, "keypress", handler, true); 
-			resolve(event); 
-	   }, true);
+		//FIXME: Still needs to handle the timeout=0 option.
+		let timeout_id=null;
+		let return_event =  { key: "Error", keyCode: -1, charCode: -1 };
+		let wait_key_handler = function (e) {
+			if (timeout < 0) {
+				if (timeout_id) clearTimeout(timeout_id);
+				tg.releaseEvent(document, "keypress", wait_key_handler, true);
+				resolve(event); 
+			} else {
+				return_event = event;
+			}
+	  };
+
+		if (timeout > 0) {
+			timeout_id = setTimeout(function timeout_code() {
+			 tg.releaseEvent(document, "keypress", wait_key_handler, true); 
+			 resolve(return_event);
+			}, timeout*1000);
+		}
+		tg.registerEvent(document, 'keypress', wait_key_handler, true);
 	});
 }

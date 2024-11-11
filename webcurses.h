@@ -4,6 +4,17 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+/**************
+* DEFINITIONS
+***************/
+
+#undef  ERR
+#define ERR     (-1)
+
+#undef  OK
+#define OK      (0)
+
+
 #if 1 && defined(_LP64)
 typedef unsigned chtype;
 typedef unsigned mmask_t;
@@ -19,7 +30,6 @@ typedef uint32_t mmask_t;
 #define COLOR_PAIR(n)   (NCURSES_BITS((n), 0) & A_COLOR)
 #define PAIR_NUMBER(a)  (NCURSES_CAST(int,((NCURSES_CAST(unsigned long,(a)) & A_COLOR) >> NCURSES_ATTR_SHIFT)))
 
-
 #define COLOR_BLACK	0
 #define COLOR_RED	1
 #define COLOR_GREEN	2
@@ -28,6 +38,10 @@ typedef uint32_t mmask_t;
 #define COLOR_MAGENTA	5
 #define COLOR_CYAN	6
 #define COLOR_WHITE	7
+
+/**************
+* FUNCTIONS
+***************/
 
 //reference: https://github.com/mirror/ncurses
 
@@ -42,5 +56,8 @@ int start_color();
 int init_pair(short pair, short f, short b);
 int pair_content(short pair, short *f, short *b); 
 int use_default_colors(void);
+int clear(void);
+int refresh(void);
+void timeout(int delay);
 
 #endif
