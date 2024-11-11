@@ -11,6 +11,12 @@ int main() {
 	initscr();
 	noecho();
 	curs_set(1);
+	char ch;
+	while ((ch = getch())) {
+		if (ch == 'q') {
+			break;
+		}
+	}
 	printf("lala\n");
 	endwin();
 }

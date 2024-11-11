@@ -1,5 +1,6 @@
 
 #include <emscripten/emscripten.h>
+#include <stdio.h>
 #include "webcurses.h"
 
 void initscr() {
@@ -36,3 +37,10 @@ void endwin() {
 	);
 }
 
+EM_ASYNC_JS(int, _get_ch, (), {
+	return (await waitForKeyPress()).charCode;
+});
+
+int	getch() {
+	return _get_ch();
+}
