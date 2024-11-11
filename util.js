@@ -1,4 +1,18 @@
 var term=null;
+let _ncurses_colors = [
+		'black',
+		'red',
+		'green',
+		'yellow',
+		'blue',
+		'darkmagenta',
+		'darkcyan',
+		'white'
+];
+
+function ncursesColorToStyle(color_id) {
+	return (16 + TermGlobals.nsColors[_ncurses_colors[color_id]])*0x100;
+}
 
 function startTerminal() {
 	if (term) return;
