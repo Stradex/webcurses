@@ -38,7 +38,7 @@ int main() {
 	char ch;
 	int frames=0;
 	for(;;) {
-		timeout(1);
+		timeout(1000/60);
 		ch = getch();
 		if (ch == 'q') {
 			break;
@@ -48,7 +48,6 @@ int main() {
 			mvaddch(random() % 15 + 1, random() % 25 + 1, ch | COLOR_PAIR(random() % (UI_MAX_COLORS - 1) + 1));
 		}
 		frames++;
-		printf("frames: %d\n", frames);
 	}
 	endwin();
 }

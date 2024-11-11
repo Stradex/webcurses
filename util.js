@@ -54,7 +54,7 @@ async function waitForKeyPress(timeout) {
 			timeout_id = setTimeout(function timeout_code() {
 			 tg.releaseEvent(document, "keypress", wait_key_handler, true); 
 			 resolve(return_event);
-			}, timeout*1000);
+			}, timeout);
 		}
 		tg.registerEvent(document, 'keypress', wait_key_handler, true);
 	});
